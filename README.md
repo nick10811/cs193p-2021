@@ -1,5 +1,7 @@
 # cs193p-2021
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 The repo contains my assignments which are following Stanford's [cs193p](https://cs193p.sites.stanford.edu/) course in 2021 and store courses materials.
 
 > ❗️The project is based on SwiftUI instead of UIKit. The language is Swift instead of Objective-C.
