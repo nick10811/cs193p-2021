@@ -11,16 +11,18 @@ struct ContentView: View {
 //    let emojis: Array<String> = ["🚙","🚌","🚛","🚑"]
 //    let emojis: [String] = ["🚙","🚌","🚛","🚑"]
     let emojis = ["🚙","🚌","🚛","🚑","🛴","🛵","🚃","🚂","✈️","🚀","🛸","🚁","⛵️","⛴","🚲","🛻","🚜","🚚","🛩","🚒","🚤","🛶","🚠","🛺"]
-    @State var emojiCount = 20
+    @State var emojiCount = 20 // @State: a property wrapper type (https://developer.apple.com/documentation/swiftui/state)
     
     var body: some View {
         VStack { // ViewsBuilder
             ScrollView {
+                // LazyVGrid: likes web `grid-template-columns`
 //            LazyVGrid(columns: [GridItem(.fixed(200)),GridItem(.flexible()),GridItem()]) {
 //                LazyVGrid(columns: [GridItem(),GridItem(),GridItem()]) {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                         //            CardView(isFaceUp: false) // override default `isFaceUp`
-                    // ForEach -> needs to be identifiable
+                    // ForEach: needs to be identifiable (https://developer.apple.com/documentation/swiftui/foreach)
+                    // `\.self`: KeyPath(type alias) https://sarunw.com/posts/what-is-keypath-in-swift/
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
@@ -69,7 +71,7 @@ struct CardView: View {
     var content: String
     @State var isFaceUp: Bool = true
     var body: some View {
-        ZStack {
+        ZStack { // Zstack: z-axis stack
 //            let shape = Circle()
             let shape = RoundedRectangle(cornerRadius: 20)
             if isFaceUp {
