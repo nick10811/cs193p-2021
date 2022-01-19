@@ -8,16 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    let vehiclesEmoji = ["🚗","🚕","🚙","🚌","🏎","🚑","🚓","🚒","🚐","🛻","🚛","✈️","🛰","🚀","🛸","🚁"]
-    let animalsEmoji = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
-    let foodsEmoji = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭","🍍","🥥"]
-    
+    @State var emojis: [String] = []
     var body: some View {
         VStack {
             Text("Memorize!").font(.largeTitle)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))]) {
-                    ForEach(vehiclesEmoji[0...12], id: \.self) { emoji in
+                    ForEach(emojis, id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
@@ -41,11 +38,11 @@ struct ContentView: View {
     var vehicleTheme: some View {
         VStack {
             Button {
-                // TODO: button action
+                emojis = CardController.shared.shuffle(by: .vehicle)
             } label: {
                 VStack {
                     Image(systemName: "car")
-                    Text("vehicle").font(.caption)
+                    Text(ThemeType.vehicle.description).font(.caption)
                 }
             }
         }
@@ -53,22 +50,22 @@ struct ContentView: View {
     
     var animalsTheme: some View {
         Button {
-            // TODO: button action
+            emojis = CardController.shared.shuffle(by: .animal)
         } label: {
             VStack {
                 Image(systemName: "hare")
-                Text("animal").font(.caption)
+                Text(ThemeType.animal.description).font(.caption)
             }
         }
     }
     
     var foodTheme: some View {
         Button {
-            // TODO: button action
+            emojis = CardController.shared.shuffle(by: .food)
         } label: {
             VStack {
                 Image(systemName: "f.circle.fill")
-                Text("food").font(.caption)
+                Text(ThemeType.food.description).font(.caption)
             }
         }
     }
