@@ -22,14 +22,10 @@ struct ContentView: View {
                 .padding()
             }
             .foregroundColor(.red)
-            HStack {
-                Spacer()
+            HStack(alignment: .center, spacing: 20) {
                 vehicleTheme
-                Spacer()
                 animalsTheme
-                Spacer()
                 foodTheme
-                Spacer()
             }
             .padding(.horizontal)
         }
