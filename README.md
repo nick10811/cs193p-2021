@@ -12,3 +12,4 @@ The repo contains my assignments which are following Stanford's [cs193p](https:/
 | ----- | ----- | ----- | ----- |
 | [1: Getting started with SwiftUI](https://www.youtube.com/watch?v=bqu6BquVi2M) | [L1](./follow-along-code/Lecture1) | - | - |
 | [2: Learning more about SwiftUI](https://www.youtube.com/watch?v=3lahkdHEhW8) | [L2](./follow-along-code/Lecture2) | [Reading 1](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/reading_1.pdf) <br> [Programming 1](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/assignment_1.pdf) <br> [Code 1](./assignment/Assignment1) | - |
+| [3: MVVM and the Swift type system](https://www.youtube.com/watch?v=--qKOhdgJAs) | [L3](./follow-along-code/Lecture3) | - | - |
