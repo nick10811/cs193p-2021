@@ -9,10 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        CardView()
-            .padding()
-            .foregroundColor(.red)
-            .aspectRatio(2/3, contentMode: .fill)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                ForEach(0..<50) { _ in
+                    CardView().aspectRatio(2/3, contentMode: .fill)
+                }
+            }
+        }
+        .padding()
+        .foregroundColor(.red)
     }
 }
 
