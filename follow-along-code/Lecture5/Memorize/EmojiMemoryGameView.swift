@@ -15,7 +15,7 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                 ForEach(game.cards) { card in
                     // HINT: (card: card) is redundant, but it's a trade-off. because we should add extra code (customized init) in the struct.
                     CardView(card: card)
@@ -38,18 +38,33 @@ struct CardView: View {
     let card: EmojiMemoryGame.Card // only pass into it the minimum it needs
     
     var body: some View {
-        ZStack { // Zstack: z-axis stack
-            let shape = RoundedRectangle(cornerRadius: 20)
-            if card.isFaceUp {
-                shape.fill().foregroundColor(.white)
-                shape.strokeBorder(lineWidth: 3)
-                Text(card.content).font(.largeTitle)
-            } else if card.isMatched {
-                shape.opacity(0)
-            } else {
-                shape.fill()
+        // CGSize()
+        GeometryReader(content: { geometry in
+            ZStack { // Zstack: z-axis stack
+                let shape = RoundedRectangle(cornerRadius: 20)
+                if card.isFaceUp {
+                    shape.fill().foregroundColor(.white)
+                    shape.strokeBorder(lineWidth: 3)
+                    Text(card.content).font(.system(size: min(geometry.size.width, geometry.size.height) * 0.8))
+                } else if card.isMatched {
+                    shape.opacity(0)
+                } else {
+                    shape.fill()
+                }
             }
-        }
+        })
+//        ZStack { // Zstack: z-axis stack
+//            let shape = RoundedRectangle(cornerRadius: 20)
+//            if card.isFaceUp {
+//                shape.fill().foregroundColor(.white)
+//                shape.strokeBorder(lineWidth: 3)
+//                Text(card.content).font(.largeTitle)
+//            } else if card.isMatched {
+//                shape.opacity(0)
+//            } else {
+//                shape.fill()
+//            }
+//        }
     }
 }
 
