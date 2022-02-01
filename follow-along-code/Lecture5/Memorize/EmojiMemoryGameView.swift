@@ -35,7 +35,7 @@ struct EmojiMemoryGameView: View {
 
 // read-only struct
 struct CardView: View {
-    let card: MemoryGame<String>.Card // only pass into it the minimum it needs
+    let card: EmojiMemoryGame.Card // only pass into it the minimum it needs
     
     var body: some View {
         ZStack { // Zstack: z-axis stack

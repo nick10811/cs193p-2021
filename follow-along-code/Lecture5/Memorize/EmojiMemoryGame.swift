@@ -9,6 +9,8 @@ import SwiftUI
 
 // ViewModel: part of UI, gatekeeper, intermediary between Model & View
 class EmojiMemoryGame: ObservableObject { // MVVM notification
+    typealias Card = MemoryGame<String>.Card
+    
     private static let emojis = ["🚙","🚌","🚛","🚑","🛴","🛵","🚃","🚂","✈️","🚀","🛸","🚁","⛵️","⛴","🚲","🛻","🚜","🚚","🛩","🚒","🚤","🛶","🚠","🛺"]
     
     private static func createMemoryGame() -> MemoryGame<String> {
@@ -21,13 +23,13 @@ class EmojiMemoryGame: ObservableObject { // MVVM notification
     @Published private var model: MemoryGame<String> = createMemoryGame()
     
     // read-only
-    var cards: Array<MemoryGame<String>.Card> {
+    var cards: Array<Card> {
         return model.cards
     }
 
     // MARK: - Intent(s)
     
-    func choose (_ card: MemoryGame<String>.Card) {
+    func choose (_ card: Card) {
 //        objectWillChange.send() // send to this world that this objectWillChange, you can call it anytime
         model.choose(card)
     }
