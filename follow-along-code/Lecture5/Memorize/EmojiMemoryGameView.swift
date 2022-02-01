@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  Memorize
 //
 //  Created by Nick Yang on 2022/1/15.
@@ -7,21 +7,22 @@
 
 import SwiftUI
 
+// quick tool: command + click
 // View: agent for showing what in the Model throught the ViewModel
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     // something changed, plz rebuild entire body
-    @ObservedObject var viewModel: EmojiMemoryGame // we don't set value here instead of passing it in the VM
+    @ObservedObject var game: EmojiMemoryGame // we don't set value here instead of passing it in the VM
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(viewModel.cards) { card in
+                ForEach(game.cards) { card in
                     // HINT: (card: card) is redundant, but it's a trade-off. because we should add extra code (customized init) in the struct.
                     CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit)
                         .onTapGesture {
                             // hook up to the Model (user's intend)
-                            viewModel.choose(card)
+                            game.choose(card)
                         }
                 }
             }
@@ -56,9 +57,9 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider { // glues preview to ContentView
     static var previews: some View {
         let game = EmojiMemoryGame()
-        ContentView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.dark)
-        ContentView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.light)
     }
 }
