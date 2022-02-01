@@ -47,7 +47,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // generic over Ca
     }
     
     init (numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
-        cards = Array<Card>()
+        cards = []
         // add numberOfPairsOfCards x 2 cards to array
         for pairIndex in 0..<numberOfPairsOfCards {
             let content: CardContent = createCardContent(pairIndex)
@@ -57,8 +57,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // generic over Ca
     }
     
     struct Card: Identifiable { // make struct can be identifiable
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
+        var isFaceUp = false
+        var isMatched = false
         let content: CardContent // we don't want to the card can be changed in any way after the card is created
         let id: Int // the id never changes once the card is created
     }

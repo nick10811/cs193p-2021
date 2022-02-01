@@ -20,7 +20,7 @@ class EmojiMemoryGame: ObservableObject { // MVVM notification
     }
 
     // anytime if mode chages so we dont need objectWillChange
-    @Published private var model: MemoryGame<String> = createMemoryGame()
+    @Published private var model = createMemoryGame() // type inference in Swift, so we dont need to set type here
     
     // read-only
     var cards: Array<Card> {
