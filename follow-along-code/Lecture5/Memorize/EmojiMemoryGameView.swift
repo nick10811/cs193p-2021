@@ -41,11 +41,12 @@ struct CardView: View {
         // CGSize()
         GeometryReader(content: { geometry in
             ZStack { // Zstack: z-axis stack
-                let shape = RoundedRectangle(cornerRadius: 20)
+                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 if card.isFaceUp {
                     shape.fill().foregroundColor(.white)
-                    shape.strokeBorder(lineWidth: 3)
-                    Text(card.content).font(.system(size: min(geometry.size.width, geometry.size.height) * 0.8))
+                    shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+//                    Text(card.content).font(.system(size: min(geometry.size.width, geometry.size.height) * DrawingConstants.fontScale))
+                    Text(card.content).font(font(in: geometry.size))
                 } else if card.isMatched {
                     shape.opacity(0)
                 } else {
@@ -65,6 +66,16 @@ struct CardView: View {
 //                shape.fill()
 //            }
 //        }
+    }
+    
+    private func font(in size: CGSize) -> Font {
+        Font.system(size: min(size.width, size.height) * DrawingConstants.fontScale)
+    }
+    
+    private struct DrawingConstants {
+        static let cornerRadius: CGFloat = 20 // we use CGFloat in drawing
+        static let lineWidth: CGFloat = 3
+        static let fontScale: CGFloat = 0.8
     }
 }
 
