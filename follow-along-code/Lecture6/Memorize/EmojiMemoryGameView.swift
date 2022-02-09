@@ -96,9 +96,10 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider { // glues preview to ContentView
     static var previews: some View {
         let game = EmojiMemoryGame()
-        EmojiMemoryGameView(game: game)
+        game.choose(game.cards.first!) // make convience for testing 
+        return EmojiMemoryGameView(game: game)
             .preferredColorScheme(.dark)
-        EmojiMemoryGameView(game: game)
-            .preferredColorScheme(.light)
+//        EmojiMemoryGameView(game: game)
+//            .preferredColorScheme(.light)
     }
 }
