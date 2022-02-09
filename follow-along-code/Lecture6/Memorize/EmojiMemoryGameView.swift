@@ -14,18 +14,21 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var game: EmojiMemoryGame // we don't set value here instead of passing it in the VM
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                ForEach(game.cards) { card in
-                    CardView(card: card)
-                        .aspectRatio(2/3, contentMode: .fit)
-                        .onTapGesture {
-                            // hook up to the Model (user's intend)
-                            game.choose(card)
-                        }
+//        ScrollView {
+//            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
+//                ForEach(game.cards) { card in
+        AspectVGrid(items: game.cards, aspectRatio: 2/3, content: { card in
+            CardView(card: card)
+                .aspectRatio(2/3, contentMode: .fit)
+                .onTapGesture {
+                    // hook up to the Model (user's intend)
+                    game.choose(card)
                 }
-            }
-        }
+        })
+                    
+//                }
+//            }
+//        }
         .foregroundColor(.red)
         .padding(.horizontal)
     }
