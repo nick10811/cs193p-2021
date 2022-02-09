@@ -14,7 +14,7 @@ class EmojiMemoryGame: ObservableObject { // MVVM notification
     private static let emojis = ["🚙","🚌","🚛","🚑","🛴","🛵","🚃","🚂","✈️","🚀","🛸","🚁","⛵️","⛴","🚲","🛻","🚜","🚚","🛩","🚒","🚤","🛶","🚠","🛺"]
     
     private static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 4) { pairIndex in
+        MemoryGame<String>(numberOfPairsOfCards: 10) { pairIndex in
             emojis[pairIndex] // full name -> EmojiMemoryGame.emojis
         }
     }
