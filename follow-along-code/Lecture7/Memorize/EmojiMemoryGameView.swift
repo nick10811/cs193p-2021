@@ -65,8 +65,12 @@ struct CardView: View {
 //                    shape.fill()
 //                }
                 Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-                    .padding(5).opacity(0.5)
-                Text(card.content).font(font(in: geometry.size))
+                    .padding(5)
+                    .opacity(0.5)
+                Text(card.content)
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                    .font(font(in: geometry.size))
             }
 //            .modifier(Cardify(isFaceUp: card.isFaceUp))
             .cardify(isFaceUp: card.isFaceUp)
