@@ -70,7 +70,9 @@ struct CardView: View {
                 Text(card.content)
                     .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
                     .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
-                    .font(font(in: geometry.size))
+//                    .font(font(in: geometry.size)) // it's vary size. it's not really animatable
+                    .font(Font.system(size: DrawingConstants.fontSize)) // use fixed size instead
+                    .scaleEffect(scale(thatFits: geometry.size))
             }
 //            .modifier(Cardify(isFaceUp: card.isFaceUp))
             .cardify(isFaceUp: card.isFaceUp)
@@ -81,11 +83,16 @@ struct CardView: View {
         Font.system(size: min(size.width, size.height) * DrawingConstants.fontScale)
     }
     
+    private func scale(thatFits size: CGSize) -> CGFloat {
+        min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
+    }
+    
     private struct DrawingConstants {
         // Cardify is going to do all that for us
 //        static let cornerRadius: CGFloat = 10 // we use CGFloat in drawing
 //        static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.7
+        static let fontSize: CGFloat = 32
     }
 }
 
