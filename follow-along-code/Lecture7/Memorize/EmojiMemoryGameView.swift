@@ -68,7 +68,7 @@ struct CardView: View {
                     .padding(5)
                     .opacity(0.5)
                 Text(card.content)
-                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0)) // animation only animates changes
                     .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
 //                    .font(font(in: geometry.size)) // it's vary size. it's not really animatable
                     .font(Font.system(size: DrawingConstants.fontSize)) // use fixed size instead
