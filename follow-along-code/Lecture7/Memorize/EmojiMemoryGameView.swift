@@ -52,19 +52,23 @@ struct CardView: View {
         // CGSize()
         GeometryReader(content: { geometry in
             ZStack { // Zstack: z-axis stack
-                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                if card.isFaceUp {
-                    shape.fill().foregroundColor(.white)
-                    shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-                        .padding(5).opacity(0.5)
-                    Text(card.content).font(font(in: geometry.size))
-                } else if card.isMatched {
-                    shape.opacity(0)
-                } else {
-                    shape.fill()
-                }
+//                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+//                if card.isFaceUp {
+//                    shape.fill().foregroundColor(.white)
+//                    shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+//                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+//                        .padding(5).opacity(0.5)
+//                    Text(card.content).font(font(in: geometry.size))
+//                } else if card.isMatched {
+//                    shape.opacity(0)
+//                } else {
+//                    shape.fill()
+//                }
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                    .padding(5).opacity(0.5)
+                Text(card.content).font(font(in: geometry.size))
             }
+            .modifier(Cardify(isFaceUp: card.isFaceUp))
         })
     }
     
@@ -73,8 +77,9 @@ struct CardView: View {
     }
     
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 10 // we use CGFloat in drawing
-        static let lineWidth: CGFloat = 3
+        // Cardify is going to do all that for us
+//        static let cornerRadius: CGFloat = 10 // we use CGFloat in drawing
+//        static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.7
     }
 }
