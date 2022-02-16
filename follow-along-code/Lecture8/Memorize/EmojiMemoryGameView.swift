@@ -13,6 +13,8 @@ struct EmojiMemoryGameView: View {
     // something changed, plz rebuild entire body
     @ObservedObject var game: EmojiMemoryGame // we don't set value here instead of passing it in the VM
     
+    @Namespace private var dealingNamespace
+    
     var body: some View {
         VStack {
             gameBody
@@ -39,9 +41,11 @@ struct EmojiMemoryGameView: View {
                 Color.clear
             } else {
                 CardView(card: card)
+                    .matchedGeometryEffect(id: card.id, in: dealingNamespace)
                     .padding(4)
 //                    .transition(AnyTransition.scale.animation(.easeInOut(duration: 2)))
-                    .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity))
+//                    .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity))
+                    .transition(AnyTransition.asymmetric(insertion: .identity, removal: .scale))
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 3)) {
                             game.choose(card)
@@ -58,7 +62,9 @@ struct EmojiMemoryGameView: View {
 //            ForEach(game.cards.filter{ isUndealt($0) }) { card in
             ForEach(game.cards.filter(isUndealt)) { card in
                 CardView(card: card)
-                    .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+                    .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+//                    .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+                    .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .identity))
             }
         }
         .frame(width: CardConstants.undealWidth, height: CardConstants.undealHeight)

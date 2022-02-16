@@ -61,7 +61,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // generic over Ca
     }
     
     struct Card: Identifiable { // make struct can be identifiable
-        var isFaceUp = false
+        var isFaceUp = true
         var isMatched = false
         let content: CardContent // we don't want to the card can be changed in any way after the card is created
         let id: Int // the id never changes once the card is created
