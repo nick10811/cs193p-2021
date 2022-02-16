@@ -36,6 +36,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // generic over Ca
         }
     }
     
+    mutating func shuffle() {
+        cards.shuffle()
+    }
+    
     func index(of card: Card) -> Int? {
         for index in 0..<cards.count {
             if cards[index].id == card.id {
@@ -53,6 +57,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // generic over Ca
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2+1))
         }
+        cards.shuffle()
     }
     
     struct Card: Identifiable { // make struct can be identifiable

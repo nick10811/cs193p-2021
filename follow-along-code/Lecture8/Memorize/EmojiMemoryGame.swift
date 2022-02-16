@@ -32,6 +32,10 @@ class EmojiMemoryGame: ObservableObject { // MVVM notification
     func choose (_ card: Card) {
         model.choose(card)
     }
+    
+    func shuffle() {
+        model.shuffle()
+    }
 }
 
 struct Previews_EmojiMemoryGame_Previews: PreviewProvider {

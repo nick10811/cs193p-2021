@@ -14,6 +14,14 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var game: EmojiMemoryGame // we don't set value here instead of passing it in the VM
     
     var body: some View {
+        VStack {
+            gameBody
+            shuffle
+        }
+        .padding()
+    }
+    
+    var gameBody: some View {
         AspectVGrid(items: game.cards, aspectRatio: 2/3, content: { card in
             if card.isMatched && !card.isFaceUp {
                 Rectangle().opacity(0)
@@ -28,6 +36,12 @@ struct EmojiMemoryGameView: View {
         })
         .foregroundColor(.red)
         .padding(.horizontal)
+    }
+    
+    var shuffle: some View {
+        Button("Shuffle") {
+            game.shuffle()
+        }
     }
     
     @ViewBuilder
