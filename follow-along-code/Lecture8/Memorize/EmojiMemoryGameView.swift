@@ -16,6 +16,7 @@ struct EmojiMemoryGameView: View {
     var body: some View {
         VStack {
             gameBody
+            deckBody
             shuffle
         }
         .padding()
@@ -40,7 +41,7 @@ struct EmojiMemoryGameView: View {
                 CardView(card: card)
                     .padding(4)
 //                    .transition(AnyTransition.scale.animation(.easeInOut(duration: 2)))
-                    .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity).animation(.easeInOut(duration: 3)))
+                    .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity))
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 3)) {
                             game.choose(card)
@@ -49,15 +50,27 @@ struct EmojiMemoryGameView: View {
 
             }
         }
-        .onAppear {
+        .foregroundColor(CardConstants.color)
+    }
+    
+    var deckBody: some View {
+        ZStack {
+//            ForEach(game.cards.filter{ isUndealt($0) }) { card in
+            ForEach(game.cards.filter(isUndealt)) { card in
+                CardView(card: card)
+                    .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+            }
+        }
+        .frame(width: CardConstants.undealWidth, height: CardConstants.undealHeight)
+        .foregroundColor(CardConstants.color)
+        .onTapGesture {
             // "deal" cards
-            withAnimation {
+            withAnimation(.easeInOut(duration: 5)) {
                 for card in game.cards {
                     deal(card)
                 }
             }
         }
-        .foregroundColor(.red)
     }
     
     var shuffle: some View {
@@ -68,17 +81,13 @@ struct EmojiMemoryGameView: View {
         }
     }
     
-    @ViewBuilder
-    private func cardView(for card: EmojiMemoryGame.Card) -> some View {
-        if card.isMatched && !card.isFaceUp {
-            Rectangle().opacity(0)
-        } else {
-            CardView(card: card)
-                .padding(4)
-                .onTapGesture {
-                    game.choose(card)
-                }
-        }
+    private struct CardConstants {
+        static let color = Color.red
+        static let aspectRatio: CGFloat = 2/3
+        static let dealDuration: Double = 0.5
+        static let totalDealDuration: Double = 2
+        static let undealHeight: CGFloat = 90
+        static let undealWidth: CGFloat = undealHeight * aspectRatio
     }
 }
 
