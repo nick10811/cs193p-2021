@@ -150,7 +150,8 @@ struct CardView: View {
         // CGSize()
         GeometryReader(content: { geometry in
             ZStack { // Zstack: z-axis stack
-                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+//                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-card.bonusRemaining)*360-90))
                     .padding(5)
                     .opacity(0.5)
                 Text(card.content)
