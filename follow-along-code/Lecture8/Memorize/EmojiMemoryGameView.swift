@@ -77,7 +77,8 @@ struct EmojiMemoryGameView: View {
                     .zIndex(zIndex(of: card))
                     .transition(AnyTransition.asymmetric(insertion: .identity, removal: .scale))
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 3)) {
+//                        withAnimation(.easeInOut(duration: 3)) {
+                        withAnimation(.easeInOut) {
                             game.choose(card)
                         }
                     }
@@ -146,14 +147,31 @@ struct EmojiMemoryGameView: View {
 struct CardView: View {
     let card: EmojiMemoryGame.Card // only pass into it the minimum it needs
     
+    @State private var animatedBonusRemaining: Double = 0
+    
     var body: some View {
         // CGSize()
         GeometryReader(content: { geometry in
             ZStack { // Zstack: z-axis stack
+                Group {
+                    if card.isConsumingBonusTime {
+                        Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-animatedBonusRemaining)*360-90))
+                            .onAppear {
+                                animatedBonusRemaining = card.bonusRemaining
+                                withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+                                    animatedBonusRemaining = 0
+                                }
+                            }
+                    } else {
+                        Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-card.bonusRemaining)*360-90))
+                    }
+                }
+                .padding(5)
+                .opacity(0.5)
 //                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-card.bonusRemaining)*360-90))
-                    .padding(5)
-                    .opacity(0.5)
+//                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: (1-card.bonusRemaining)*360-90))
+//                    .padding(5)
+//                    .opacity(0.5)
                 Text(card.content)
                     .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0)) // animation only animates changes
                     .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
