@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmojiArtDocumentView: View {
+    @ObservedObject var document: EmojiArtDocument // ViewModel
+    
     var body: some View {
         Text("Hello, world!")
             .padding()
@@ -16,6 +18,6 @@ struct EmojiArtDocumentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiArtDocumentView()
+        EmojiArtDocumentView(document: EmojiArtDocument())
     }
 }
