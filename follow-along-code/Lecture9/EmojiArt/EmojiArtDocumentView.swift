@@ -29,6 +29,9 @@ struct EmojiArtDocumentView: View {
                         .position(position(for: emoji, in: geometry))
                 }
             }
+            .onDrop(of: [.plainText], isTargeted: nil) { providers, location in
+                return drop(providers: providers, at: location, in: geometry)
+            }
         }
 //        ZStack {
 //            Color.yellow
@@ -39,8 +42,29 @@ struct EmojiArtDocumentView: View {
 //        }
     }
     
+    private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {
+        return providers.loadObjects(ofType: String.self) { string in
+            if let emoji = string.first, emoji.isEmoji {
+                document.addEmoji(
+                    String(emoji),
+                    at: convertToEmojiCoordinates(location, in: geometry),
+                    size: defaultEmojiFontSize
+                )
+            }
+        }
+    }
+    
     private func position(for emoji: EmojiArtModel.Emoji, in geometry: GeometryProxy) -> CGPoint {
         convertFromEmojiCoordinates((emoji.x, emoji.y), in: geometry)
+    }
+    
+    private func convertToEmojiCoordinates(_ location: CGPoint, in geometry: GeometryProxy) -> (x: Int, y: Int) {
+        let center = geometry.frame(in: .local).center
+        let location = CGPoint(
+            x: location.x - center.x,
+            y: location.y - center.y
+        )
+        return (Int(location.x), Int(location.y))
     }
     
     private func convertFromEmojiCoordinates(_ location: (x: Int, y: Int), in geometry: GeometryProxy) -> CGPoint {
