@@ -11,7 +11,7 @@ struct EmojiArtModel {
     var background = Background.blank
     var emojis = [Emoji]()
     
-    struct Emoji: Identifiable {
+    struct Emoji: Identifiable, Hashable {
         let text: String
         var x: Int
         var y: Int
