@@ -14,6 +14,8 @@ class EmojiArtDocument: ObservableObject
     
     init() {
         emojiArt = EmojiArtModel()
+        addEmoji("😇", at: (-200, -100), size: 80)
+        addEmoji("💪", at: (50, 100), size: 40)
     }
     
     // convience functions
