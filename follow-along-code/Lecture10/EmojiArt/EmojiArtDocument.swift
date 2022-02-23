@@ -35,10 +35,18 @@ class EmojiArtDocument: ObservableObject
         switch emojiArt.background {
         case .url(let url):
             // fetch the url
-            let imageData = try? Data(contentsOf: url)
-            if imageData != nil {
-                backgroundImage = UIImage(data: imageData!)
+            DispatchQueue.global(qos: .userInitiated).async {
+                let imageData = try? Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    if imageData != nil {
+                        self.backgroundImage = UIImage(data: imageData!)
+                    }
+                }
             }
+//            let imageData = try? Data(contentsOf: url)
+//            if imageData != nil {
+//                backgroundImage = UIImage(data: imageData!)
+//            }
         case .imageData(let data):
             backgroundImage = UIImage(data: data)
         case .blank:
