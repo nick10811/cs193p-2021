@@ -115,6 +115,9 @@ struct EmojiArtDocumentView: View {
     private func zoomGesture() -> some Gesture {
         // pinching
         MagnificationGesture()
+            .updating($gestureZoomScale) { latestGestureScale, gestureZoomScale, transaction in
+                gestureZoomScale = latestGestureScale
+            }
             .onEnded { gestureScaleAtEnd in
                 steadyStateZoomScale *= gestureScaleAtEnd
             }
