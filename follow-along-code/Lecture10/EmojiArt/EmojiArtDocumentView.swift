@@ -49,6 +49,7 @@ struct EmojiArtDocumentView: View {
             .onDrop(of: [.plainText, .url, .image], isTargeted: nil) { providers, location in
                 return drop(providers: providers, at: location, in: geometry)
             }
+            .gesture(zoomGesture())
         }
     }
     
@@ -105,6 +106,14 @@ struct EmojiArtDocumentView: View {
     
     // @State -> it's a temporary situation, and it's not part of the model
     @State private var zoomScale: CGFloat = 1
+    
+    private func zoomGesture() -> some Gesture {
+        // pinching
+        MagnificationGesture()
+            .onEnded { gestureScaleAtEnd in
+                zoomScale *= gestureScaleAtEnd
+            }
+    }
     
     private func doubleTapToZoom(in size: CGSize) -> some Gesture {
         return TapGesture(count: 2)
