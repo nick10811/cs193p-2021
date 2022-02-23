@@ -109,7 +109,11 @@ struct EmojiArtDocumentView: View {
         return TapGesture(count: 2)
             .onEnded {
                 // do somthing after taping
-                zoomToFit(document.backgroundImage, in: size)
+//                zoomToFit(document.backgroundImage, in: size)
+                // use animation to make it smoother
+                withAnimation {
+                    zoomToFit(document.backgroundImage, in: size)
+                }
             }
     }
     
