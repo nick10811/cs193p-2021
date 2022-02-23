@@ -106,6 +106,7 @@ struct EmojiArtDocumentView: View {
     
     // @State -> it's a temporary situation, and it's not part of the model
     @State private var zoomScale: CGFloat = 1
+    @GestureState private var gestureZoomScale: CGFloat = 1
     
     private func zoomGesture() -> some Gesture {
         // pinching
