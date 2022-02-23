@@ -28,6 +28,7 @@ struct EmojiArtDocumentView: View {
                         .scaleEffect(zoomScale)
                         .position(convertFromEmojiCoordinates((0, 0), in: geometry))
                 )
+                    .gesture(doubleTapToZoom(in: geometry.size))
                 if document.backgoundFetchImageStatus == .fetching {
                     ProgressView().scaleEffect(2)
                 } else {
@@ -103,6 +104,14 @@ struct EmojiArtDocumentView: View {
     
     // @State -> it's a temporary situation, and it's not part of the model
     @State private var zoomScale: CGFloat = 1
+    
+    private func doubleTapToZoom(in size: CGSize) -> some Gesture {
+        return TapGesture(count: 2)
+            .onEnded {
+                // do somthing after taping
+                zoomToFit(document.backgroundImage, in: size)
+            }
+    }
     
     private func zoomToFit(_ image: UIImage?, in size: CGSize) {
         if let image = image, image.size.width > 0, image.size.height > 0, size.height > 0, size.width > 0 {
