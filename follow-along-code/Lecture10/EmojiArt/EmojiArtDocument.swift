@@ -38,12 +38,18 @@ class EmojiArtDocument: ObservableObject
             DispatchQueue.global(qos: .userInitiated).async {
                 let imageData = try? Data(contentsOf: url)
                 DispatchQueue.main.async { [weak self] in
-                    // the closure is going to be put in the heap
-                    if imageData != nil {
-                        // `self` makes this closure which lives in memory point to VM
-//                        self.backgroundImage = UIImage(data: imageData!)
-                        self?.backgroundImage = UIImage(data: imageData!)
+                    if self?.emojiArt.background == EmojiArtModel.Background.url(url) {
+                        // check that is still the image that the user wants
+                        if imageData != nil {
+                            self?.backgroundImage = UIImage(data: imageData!)
+                        }
                     }
+                    // the closure is going to be put in the heap
+//                    if imageData != nil {
+//                        // `self` makes this closure which lives in memory point to VM
+////                        self.backgroundImage = UIImage(data: imageData!)
+//                        self?.backgroundImage = UIImage(data: imageData!)
+//                    }
                 }
             }
 //            let imageData = try? Data(contentsOf: url)
