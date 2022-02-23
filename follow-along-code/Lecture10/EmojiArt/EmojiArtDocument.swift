@@ -31,7 +31,19 @@ class EmojiArtDocument: ObservableObject
     @Published var backgroundImage: UIImage?
     
     private func fetchBackgroundImageDataIfNeccesary() {
-        
+        backgroundImage = nil
+        switch emojiArt.background {
+        case .url(let url):
+            // fetch the url
+            let imageData = try? Data(contentsOf: url)
+            if imageData != nil {
+                backgroundImage = UIImage(data: imageData!)
+            }
+        case .imageData(let data):
+            backgroundImage = UIImage(data: data)
+        case .blank:
+            break
+        }
     }
  
     // MARK: - Intent(s)
