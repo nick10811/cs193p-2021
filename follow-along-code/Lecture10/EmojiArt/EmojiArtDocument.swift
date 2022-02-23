@@ -10,7 +10,13 @@ import SwiftUI
 // ViewModel -> always class
 class EmojiArtDocument: ObservableObject
 {
-    @Published private(set) var emojiArt: EmojiArtModel
+    @Published private(set) var emojiArt: EmojiArtModel {
+        didSet {
+            if emojiArt.background != oldValue.background {
+                fetchBackgroundImageDataIfNeccesary()
+            }
+        }
+    }
     
     init() {
         emojiArt = EmojiArtModel()
@@ -24,6 +30,10 @@ class EmojiArtDocument: ObservableObject
     
     @Published var backgroundImage: UIImage?
     
+    private func fetchBackgroundImageDataIfNeccesary() {
+        
+    }
+ 
     // MARK: - Intent(s)
     func setBackground(_ background: EmojiArtModel.Background) {
         emojiArt.background = background
