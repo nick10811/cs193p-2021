@@ -27,7 +27,9 @@ class EmojiArtDocument: ObservableObject
         let thisfunction = "\(String(describing: self)).\(#function))"
         do {
             let data: Data = try emojiArt.json()
+            print("\(thisfunction) json = \(String(data: data, encoding: .utf8))")
             try data.write(to: url)
+            print("\(thisfunction) success!")
         } catch let encodingError where encodingError is EncodingError {
             print("\(thisfunction) couldn't encode EmojiArt as JSON because \(encodingError.localizedDescription)")
         } catch {
