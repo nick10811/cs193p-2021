@@ -8,7 +8,7 @@
 // ViewModel: PlatteStore
 import SwiftUI
 
-struct Palette: Identifiable {
+struct Palette: Identifiable, Codable {
     var name: String
     var emojis: String
     var id: Int
@@ -34,22 +34,27 @@ class PaletteStore: ObservableObject {
     }
     
     private func storeInUserDefaults() {
+        UserDefaults.standard.set(try? JSONEncoder().encode(palettes), forKey: userDefaultsKey)
         // only insert property list object
         // convert to an array of array of string
-        UserDefaults.standard.set(palettes.map{ [$0.name, $0.emojis,String($0.id)] }, forKey: userDefaultsKey)
+//        UserDefaults.standard.set(palettes.map{ [$0.name, $0.emojis,String($0.id)] }, forKey: userDefaultsKey)
     }
     
     private func restoreFromUserDefaults() {
-        if let palettesAsPropertyList = UserDefaults.standard.array(forKey: userDefaultsKey) as? [[String]] {
-            for paletteAsArray in palettesAsPropertyList {
-                if paletteAsArray.count == 3,
-                   let id = Int(paletteAsArray[2]),
-                   !palettes.contains(where: { $0.id == id }) {
-                    let palette = Palette(name: paletteAsArray[0], emojis: paletteAsArray[1], id: id)
-                    palettes.append(palette)
-                }
-            }
+        if let jsonData = UserDefaults.standard.data(forKey: userDefaultsKey),
+           let decodedPalettes = try? JSONDecoder().decode(Array<Palette>.self, from: jsonData) {
+               palettes = decodedPalettes
         }
+//        if let palettesAsPropertyList = UserDefaults.standard.array(forKey: userDefaultsKey) as? [[String]] {
+//            for paletteAsArray in palettesAsPropertyList {
+//                if paletteAsArray.count == 3,
+//                   let id = Int(paletteAsArray[2]),
+//                   !palettes.contains(where: { $0.id == id }) {
+//                    let palette = Palette(name: paletteAsArray[0], emojis: paletteAsArray[1], id: id)
+//                    palettes.append(palette)
+//                }
+//            }
+//        }
     }
     
     init(named name: String) {
