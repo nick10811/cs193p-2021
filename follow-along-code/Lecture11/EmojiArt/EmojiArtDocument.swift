@@ -12,10 +12,20 @@ class EmojiArtDocument: ObservableObject
 {
     @Published private(set) var emojiArt: EmojiArtModel {
         didSet {
-            autosave()
+            scheduleAutosave()
             if emojiArt.background != oldValue.background {
                 fetchBackgroundImageDataIfNeccesary()
             }
+        }
+    }
+    
+    private func scheduleAutosave() {
+        Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
+            // I want to this clousre to hold this self in the memory.
+            // I have a chance to autosave it.
+            // Hence, I don't put [weak self] in here
+            // ( It's a feature not a bug)
+            self.autosave()
         }
     }
     
@@ -27,6 +37,7 @@ class EmojiArtDocument: ObservableObject
             let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
             return documentDirectory?.appendingPathComponent(filename)
         }
+        static let coalescingInterval = 5.0
     }
     
     private func autosave() {
