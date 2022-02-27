@@ -19,8 +19,11 @@ class EmojiArtDocument: ObservableObject
         }
     }
     
+    private var autosaveTimer: Timer?
+    
     private func scheduleAutosave() {
-        Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
+        autosaveTimer?.invalidate() // cancel previous timer
+        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
             // I want to this clousre to hold this self in the memory.
             // I have a chance to autosave it.
             // Hence, I don't put [weak self] in here
