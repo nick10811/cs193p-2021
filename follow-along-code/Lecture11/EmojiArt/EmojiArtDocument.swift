@@ -56,7 +56,14 @@ class EmojiArtDocument: ObservableObject
     }
     
     init() {
-        emojiArt = EmojiArtModel()
+        if let url = Autosave.url,
+           let autosavedEmojiArt = try? EmojiArtModel(url: url) {
+            // loading from the local storage
+            emojiArt = autosavedEmojiArt
+        } else {
+            emojiArt = EmojiArtModel()
+        }
+//        emojiArt = EmojiArtModel()
 //        addEmoji("😇", at: (-200, -100), size: 80)
 //        addEmoji("💪", at: (50, 100), size: 40)
     }
