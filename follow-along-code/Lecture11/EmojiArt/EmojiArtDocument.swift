@@ -12,9 +12,26 @@ class EmojiArtDocument: ObservableObject
 {
     @Published private(set) var emojiArt: EmojiArtModel {
         didSet {
+            autosave()
             if emojiArt.background != oldValue.background {
                 fetchBackgroundImageDataIfNeccesary()
             }
+        }
+    }
+    
+    // constant struct
+    private struct Autosave {
+        static let filename = "Autosaved.emojiart" // image like jpeg, tiff
+        static var url: URL? {
+            // in the main queue
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            return documentDirectory?.appendingPathComponent(filename)
+        }
+    }
+    
+    private func autosave() {
+        if let url = Autosave.url {
+            save(to: url)
         }
     }
     
