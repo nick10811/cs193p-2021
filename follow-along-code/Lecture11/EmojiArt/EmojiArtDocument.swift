@@ -60,6 +60,9 @@ class EmojiArtDocument: ObservableObject
            let autosavedEmojiArt = try? EmojiArtModel(url: url) {
             // loading from the local storage
             emojiArt = autosavedEmojiArt
+            
+            // background is from url
+            fetchBackgroundImageDataIfNeccesary()
         } else {
             emojiArt = EmojiArtModel()
         }
