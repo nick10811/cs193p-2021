@@ -20,8 +20,18 @@ class EmojiArtDocument: ObservableObject
     
     private func save(to url: URL) {
         // save to the local file system
-        let data: Data = emojiArt.json()
-        data.write(to: url)
+//        let data: Data = emojiArt.json()
+//        data.write(to: url)
+        
+        // error handling
+        let thisfunction = "\(String(describing: self)).\(#function))"
+        do {
+            let data: Data = try emojiArt.json()
+            try data.write(to: url)
+        } catch {
+//            print("EmojiArtDocument.save(to:) error = \(error)")
+            print("\(thisfunction) error = \(error)")
+        }
     }
     
     init() {
