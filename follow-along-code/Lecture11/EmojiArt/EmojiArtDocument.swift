@@ -18,6 +18,12 @@ class EmojiArtDocument: ObservableObject
         }
     }
     
+    private func save(to url: URL) {
+        // save to the local file system
+        let data: Data = emojiArt.json()
+        data.write(to: url)
+    }
+    
     init() {
         emojiArt = EmojiArtModel()
 //        addEmoji("😇", at: (-200, -100), size: 80)
