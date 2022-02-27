@@ -15,7 +15,14 @@ extension EmojiArtModel {
         case imageData(Data)
         
         init(from decoder: Decoder) throws {
-            
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            if let url = try? container.decode(URL.self, forKey: .url) {
+                self = .url(url)
+            } else if let data = try? container.decode(Data.self, forKey: .imageData) {
+                self = .imageData(data)
+            } else {
+                self = .blank
+            }
         }
         
         enum CodingKeys: String, CodingKey {
