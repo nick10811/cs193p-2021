@@ -83,7 +83,10 @@ struct PaletteChooser: View {
         }
         .id(palette.id) // trick: tag a view by id. when id is changed, HStack remove and replaces it with a new one
         .transition(rollTransition)
-        .sheet(isPresented: $editing) {
+//        .sheet(isPresented: $editing) {
+//            PaletteEditor()
+//        }
+        .popover(isPresented: $editing) {
             PaletteEditor()
         }
     }
