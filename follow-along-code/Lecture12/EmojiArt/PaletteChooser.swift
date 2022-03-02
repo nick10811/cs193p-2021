@@ -34,7 +34,9 @@ struct PaletteChooser: View {
     
     var paletteControlButton: some View {
         Button {
-            chosenPaletteIndex = (chosenPaletteIndex + 1) % store.palettes.count
+            withAnimation {
+                chosenPaletteIndex = (chosenPaletteIndex + 1) % store.palettes.count
+            }
         } label: {
             Image(systemName: "paintpalette")
         }
@@ -47,6 +49,15 @@ struct PaletteChooser: View {
             ScrollingEmojisView(emojis: palette.emojis)
                 .font(emojiFont)
         }
+        .id(palette.id) // trick: tag a view by id. when id is changed, HStack remove and replaces it with a new one
+        .transition(rollTransition)
+    }
+    
+    var rollTransition: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .offset(x: 0, y: emojiFontSize),
+            removal: .offset(x: 0, y: -emojiFontSize)
+        )
     }
 }
 
