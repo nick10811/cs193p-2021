@@ -15,6 +15,7 @@ struct PaletteEditor: View {
             TextField("Name", text: $palette.name)
 
         }
+        .frame(minWidth: 300, minHeight: 350)
         // $ is binding palette.name & @State palette
 //        TextField("Name", text: $palette.name)
     }
