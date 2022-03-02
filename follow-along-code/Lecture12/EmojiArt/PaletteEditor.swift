@@ -11,8 +11,12 @@ struct PaletteEditor: View {
     @State private var palette: Palette = PaletteStore(named: "Test").palette(at: 2)
     
     var body: some View {
+        Form {
+            TextField("Name", text: $palette.name)
+
+        }
         // $ is binding palette.name & @State palette
-        TextField("Name", text: $palette.name)
+//        TextField("Name", text: $palette.name)
     }
 }
 
