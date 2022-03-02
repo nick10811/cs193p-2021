@@ -14,11 +14,17 @@ struct PaletteChooser: View {
     @EnvironmentObject var store: PaletteStore
     
     var body: some View {
-        ScrollingEmojisView(emojis: testEmojis)
-            .font(emojiFont)
+        let palette = store.palette(at: 0)
+        HStack {
+            Text(palette.name)
+            ScrollingEmojisView(emojis: palette.emojis)
+                .font(emojiFont)
+        }
+//        ScrollingEmojisView(emojis: testEmojis)
+//            .font(emojiFont)
     }
     
-    let testEmojis = "😀😷🦠💉👻👀🐶🌲🌎🌞🔥🍎⚽️🚗🚓🚲🛩🚁🚀🛸🏠⌚️🎁🗝🔐❤️⛔️❌❓✅⚠️🎶➕➖🏳️"
+//    let testEmojis = "😀😷🦠💉👻👀🐶🌲🌎🌞🔥🍎⚽️🚗🚓🚲🛩🚁🚀🛸🏠⌚️🎁🗝🔐❤️⛔️❌❓✅⚠️🎶➕➖🏳️"
 }
 
 struct ScrollingEmojisView: View {
