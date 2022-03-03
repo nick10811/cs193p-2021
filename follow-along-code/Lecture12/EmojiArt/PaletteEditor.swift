@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct PaletteEditor: View {
-    @State private var palette: Palette = PaletteStore(named: "Test").palette(at: 2)
+//    @State private var palette: Palette = PaletteStore(named: "Test").palette(at: 2)
+    // @Binding cannot be private
+    @Binding var palette: Palette
     
     var body: some View {
         Form {
@@ -23,7 +25,8 @@ struct PaletteEditor: View {
 
 struct PaletteEditor_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteEditor()
+        Text("Fixe Me!")
+//        PaletteEditor()
             .previewLayout(.fixed(width: 300, height: 350))
     }
 }

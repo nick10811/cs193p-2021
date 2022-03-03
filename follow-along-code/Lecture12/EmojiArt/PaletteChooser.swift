@@ -87,7 +87,8 @@ struct PaletteChooser: View {
 //            PaletteEditor()
 //        }
         .popover(isPresented: $editing) {
-            PaletteEditor()
+//            PaletteEditor()
+            PaletteEditor(palette: $store.palettes[chosenPaletteIndex])
         }
     }
     
