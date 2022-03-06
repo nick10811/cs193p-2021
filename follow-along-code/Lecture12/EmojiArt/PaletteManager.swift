@@ -23,7 +23,11 @@ struct PaletteManager: View {
                             Text(palette.name).font(editMode == .active ? .largeTitle : .caption)
                             Text(palette.emojis)
                         }
+                        .gesture(editMode == .active ? tap : nil)
                     }
+//                    .onTapGesture {
+//                        // override the NavigationLink in here
+//                    }
                 }
                 .onDelete { indexSet in
                     store.palettes.remove(atOffsets: indexSet)
@@ -38,6 +42,12 @@ struct PaletteManager: View {
                 EditButton()
             }
             .environment(\.editMode, $editMode) // set to environment
+        }
+    }
+    
+    var tap: some Gesture {
+        TapGesture().onEnded {
+            print("tap gesture")
         }
     }
 }
