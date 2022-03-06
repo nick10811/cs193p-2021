@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PaletteManager: View {
     @EnvironmentObject var store: PaletteStore
+    @Environment(\.colorScheme) var colorScheme // get environment
     
     var body: some View {
         NavigationView {
@@ -17,7 +18,7 @@ struct PaletteManager: View {
                     // NavigationLink only works inside the NavigationView
                     NavigationLink(destination: PaletteEditor(palette: $store.palettes[palette])) {
                         VStack(alignment: .leading) {
-                            Text(palette.name)
+                            Text(palette.name).font(colorScheme == .dark ? .largeTitle : .caption)
                             Text(palette.emojis)
                         }
                     }
@@ -34,5 +35,6 @@ struct PaletteManager_Previews: PreviewProvider {
         PaletteManager()
             .previewDevice("iPhone 8")
             .environmentObject(PaletteStore(named: "Preview"))
+            .preferredColorScheme(.dark)
     }
 }
