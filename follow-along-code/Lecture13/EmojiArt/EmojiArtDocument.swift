@@ -100,6 +100,7 @@ class EmojiArtDocument: ObservableObject
         case .url(let url):
             // fetch the url
             backgoundFetchImageStatus = .fetching
+            backgroundImageFetchCancellable?.cancel()
             
             // URLSession solution
             let session = URLSession.shared
@@ -107,12 +108,33 @@ class EmojiArtDocument: ObservableObject
             let publisher = session.dataTaskPublisher(for: url)
                 .map { (data, urlResponse) in UIImage(data: data) }
                 .replaceError(with: nil)
-            
-//            let cancellable = publisher
-//                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
-//            cancellable.cancel()
+
+////            let cancellable = publisher
+////                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
+////            cancellable.cancel()
             backgroundImageFetchCancellable = publisher
-                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
+//                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
+                .sink { [weak self] image in
+                    self?.backgroundImage = image
+                    self?.backgoundFetchImageStatus = (image != nil) ? .idle : .failed(url)
+                }
+
+
+//            let publisher = session.dataTaskPublisher(for: url)
+//                .map { (data, urlResponse) in UIImage(data: data) }
+//
+//            backgroundImageFetchCancellable = publisher
+//                .sink(receiveCompletion: { result in
+//                    switch result {
+//                    case .finished:
+//                        print("success!")
+//                    case .failure(let error): // URLError
+//                        print("failed: error = \(error)")
+//                    }
+//                }, receiveValue: { [weak self] image in
+//                    self?.backgroundImage = image
+//                    self?.backgoundFetchImageStatus = (image != nil) ? .idle : .failed(url)
+//                })
             
             // GCD solution
 //            DispatchQueue.global(qos: .userInitiated).async {
