@@ -11,6 +11,7 @@ struct PaletteManager: View {
     @EnvironmentObject var store: PaletteStore
     @Environment(\.colorScheme) var colorScheme // get environment
     
+    @State private var editMode: EditMode = .inactive
     var body: some View {
         NavigationView {
             List {
@@ -18,7 +19,8 @@ struct PaletteManager: View {
                     // NavigationLink only works inside the NavigationView
                     NavigationLink(destination: PaletteEditor(palette: $store.palettes[palette])) {
                         VStack(alignment: .leading) {
-                            Text(palette.name).font(colorScheme == .dark ? .largeTitle : .caption)
+//                            Text(palette.name).font(colorScheme == .dark ? .largeTitle : .caption)
+                            Text(palette.name).font(editMode == .active ? .largeTitle : .caption)
                             Text(palette.emojis)
                         }
                     }
@@ -26,6 +28,10 @@ struct PaletteManager: View {
             }
             .navigationTitle("Manage Palettes")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                EditButton()
+            }
+            .environment(\.editMode, $editMode) // set to environment
         }
     }
 }
@@ -35,6 +41,6 @@ struct PaletteManager_Previews: PreviewProvider {
         PaletteManager()
             .previewDevice("iPhone 8")
             .environmentObject(PaletteStore(named: "Preview"))
-            .preferredColorScheme(.dark)
+            .preferredColorScheme(.light)
     }
 }
