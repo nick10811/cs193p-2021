@@ -14,12 +14,18 @@ struct PaletteEditor: View {
     
     var body: some View {
         Form {
-            TextField("Name", text: $palette.name)
-
+            //            TextField("Name", text: $palette.name)
+            nameSection
         }
         .frame(minWidth: 300, minHeight: 350)
         // $ is binding palette.name & @State palette
 //        TextField("Name", text: $palette.name)
+    }
+    
+    var nameSection: some View {
+        Section(header: Text("Name")) {
+            TextField("Name", text: $palette.name)
+        }
     }
 }
 
