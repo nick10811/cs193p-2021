@@ -108,6 +108,10 @@ class EmojiArtDocument: ObservableObject
             let publisher = session.dataTaskPublisher(for: url)
                 .map { (data, urlResponse) in UIImage(data: data) }
                 .replaceError(with: nil)
+                // URLSession is placed on the background
+                // we need to put it back to the main queue to manipulate UI
+                // there is purple warning on the top-right to speicify the UI is placed on the background queue
+                .receive(on: DispatchQueue.main)
 
 ////            let cancellable = publisher
 ////                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
