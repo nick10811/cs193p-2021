@@ -10,6 +10,7 @@ import SwiftUI
 struct PaletteManager: View {
     @EnvironmentObject var store: PaletteStore
     @Environment(\.colorScheme) var colorScheme // get environment
+    @Environment(\.presentationMode) var presntationMode
     
     @State private var editMode: EditMode = .inactive
     var body: some View {
@@ -39,7 +40,17 @@ struct PaletteManager: View {
             .navigationTitle("Manage Palettes")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                EditButton()
+//                EditButton()
+                ToolbarItem{ EditButton() }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if presntationMode.wrappedValue.isPresented,
+                       UIDevice.current.userInterfaceIdiom != .pad {
+                        // ipad can click outside of the sheet
+                        Button("Close") {
+                            presntationMode.wrappedValue.dismiss()
+                        }
+                    }
+                }
             }
             .environment(\.editMode, $editMode) // set to environment
         }
