@@ -23,6 +23,8 @@ struct PaletteManager: View {
                     }
                 }
             }
+            .navigationTitle("Manage Palettes")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

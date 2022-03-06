@@ -19,6 +19,7 @@ struct PaletteEditor: View {
             addEmojisSection
             removeEmojiSection
         }
+        .navigationTitle("Edit \(palette.name)")
         .frame(minWidth: 300, minHeight: 350)
         // $ is binding palette.name & @State palette
 //        TextField("Name", text: $palette.name)
