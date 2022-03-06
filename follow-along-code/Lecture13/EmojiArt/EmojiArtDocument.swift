@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 // ViewModel -> always class
 class EmojiArtDocument: ObservableObject
@@ -90,6 +91,9 @@ class EmojiArtDocument: ObservableObject
         case failed(URL)
     }
     
+    // AnyCancellable is part of Combine framwork
+    private var backgroundImageFetchCancellable: AnyCancellable?
+    
     private func fetchBackgroundImageDataIfNeccesary() {
         backgroundImage = nil
         switch emojiArt.background {
@@ -104,10 +108,11 @@ class EmojiArtDocument: ObservableObject
                 .map { (data, urlResponse) in UIImage(data: data) }
                 .replaceError(with: nil)
             
-            let cancellable = publisher
+//            let cancellable = publisher
+//                .assign(to: \EmojiArtDocument.backgroundImage, on: self)
+//            cancellable.cancel()
+            backgroundImageFetchCancellable = publisher
                 .assign(to: \EmojiArtDocument.backgroundImage, on: self)
-            cancellable.cancel()
-            
             
             // GCD solution
 //            DispatchQueue.global(qos: .userInitiated).async {
