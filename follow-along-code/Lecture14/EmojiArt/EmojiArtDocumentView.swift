@@ -124,7 +124,8 @@ struct EmojiArtDocumentView: View {
         CGFloat(emoji.size)
     }
 
-    @State private var steadyStatePanOffset: CGSize = CGSize.zero
+    @SceneStorage("EmojiArtDocumentView.steadyStatePanOffset")
+    private var steadyStatePanOffset: CGSize = CGSize.zero
     @GestureState private var gesturePanOffset: CGSize = .zero
     
     private var panOffset: CGSize {
@@ -143,7 +144,9 @@ struct EmojiArtDocumentView: View {
     }
 
     // @State -> it's a temporary situation, and it's not part of the model
-    @State private var steadyStateZoomScale: CGFloat = 1
+    @SceneStorage("EmojiArtDocumentView.steadyStateZoomScale")
+    private var steadyStateZoomScale: CGFloat = 1
+//    @State private var steadyStateZoomScale: CGFloat = 1
     @GestureState private var gestureZoomScale: CGFloat = 1
     
     private var zoomScale: CGFloat {
