@@ -59,10 +59,14 @@ struct EmojiArtDocumentView: View {
             }
             // listen to a publisher
             .onReceive(document.$backgroundImage) { image in
-                zoomToFit(image, in: geometry.size)
+                if autozoom {
+                    zoomToFit(image, in: geometry.size)
+                }
             }
         }
     }
+    
+    @State private var autozoom = false
     
     @State private var alertToShow: IdentifiableAlert?
     
@@ -74,13 +78,16 @@ struct EmojiArtDocumentView: View {
         })
     }
     
+    // MARK: - Drop & Drag
     private func drop(providers: [NSItemProvider], at location: CGPoint, in geometry: GeometryProxy) -> Bool {
         var found = providers.loadObjects(ofType: URL.self) { url in
+            autozoom = true
             document.setBackground(.url(url.imageURL))
         }
         if !found {
             found = providers.loadObjects(ofType: UIImage.self) { image in
                 if let data = image.jpegData(compressionQuality: 1.0) {
+                    autozoom = true
                     document.setBackground(.imageData(data))
                 }
             }
