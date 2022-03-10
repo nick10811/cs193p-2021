@@ -15,11 +15,15 @@ struct EmojiArtApp: App {
     
     // Scene: contains the top-level View of application
     var body: some Scene {
-        WindowGroup {
-            // this closure is creating one of those Scenes
-            // and use same VM in those Scense
-            EmojiArtDocumentView(document: document)
+        DocumentGroup(newDocument: { EmojiArtDocument() }) { config in
+            EmojiArtDocumentView(document: config.document)
                 .environmentObject(paletteStore)
         }
+//        WindowGroup {
+//            // this closure is creating one of those Scenes
+//            // and use same VM in those Scense
+//            EmojiArtDocumentView(document: document)
+//                .environmentObject(paletteStore)
+//        }
     }
 }

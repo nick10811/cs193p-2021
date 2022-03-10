@@ -13,69 +13,72 @@ class EmojiArtDocument: ObservableObject
 {
     @Published private(set) var emojiArt: EmojiArtModel {
         didSet {
-            scheduleAutosave()
+//            scheduleAutosave()
             if emojiArt.background != oldValue.background {
                 fetchBackgroundImageDataIfNeccesary()
             }
         }
     }
     
-    private var autosaveTimer: Timer?
-    
-    private func scheduleAutosave() {
-        autosaveTimer?.invalidate() // cancel previous timer
-        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
-            // I want to this clousre to hold this self in the memory.
-            // I have a chance to autosave it.
-            // Hence, I don't put [weak self] in here
-            // ( It's a feature not a bug)
-            self.autosave()
-        }
-    }
-    
-    // constant struct
-    private struct Autosave {
-        static let filename = "Autosaved.emojiart" // image like jpeg, tiff
-        static var url: URL? {
-            // in the main queue
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-            return documentDirectory?.appendingPathComponent(filename)
-        }
-        static let coalescingInterval = 5.0
-    }
-    
-    private func autosave() {
-        if let url = Autosave.url {
-            save(to: url)
-        }
-    }
-    
-    private func save(to url: URL) {
-        // error handling
-        let thisfunction = "\(String(describing: self)).\(#function))"
-        do {
-            let data: Data = try emojiArt.json()
-            print("\(thisfunction) json = \(String(data: data, encoding: .utf8))")
-            try data.write(to: url)
-            print("\(thisfunction) success!")
-        } catch let encodingError where encodingError is EncodingError {
-            print("\(thisfunction) couldn't encode EmojiArt as JSON because \(encodingError.localizedDescription)")
-        } catch {
-            print("\(thisfunction) error = \(error)")
-        }
-    }
+    // remove all of those
+    // we use Document Types instead.
+//    private var autosaveTimer: Timer?
+//
+//    private func scheduleAutosave() {
+//        autosaveTimer?.invalidate() // cancel previous timer
+//        autosaveTimer = Timer.scheduledTimer(withTimeInterval: Autosave.coalescingInterval, repeats: false) { _ in
+//            // I want to this clousre to hold this self in the memory.
+//            // I have a chance to autosave it.
+//            // Hence, I don't put [weak self] in here
+//            // ( It's a feature not a bug)
+//            self.autosave()
+//        }
+//    }
+//
+//    // constant struct
+//    private struct Autosave {
+//        static let filename = "Autosaved.emojiart" // image like jpeg, tiff
+//        static var url: URL? {
+//            // in the main queue
+//            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+//            return documentDirectory?.appendingPathComponent(filename)
+//        }
+//        static let coalescingInterval = 5.0
+//    }
+//
+//    private func autosave() {
+//        if let url = Autosave.url {
+//            save(to: url)
+//        }
+//    }
+//
+//    private func save(to url: URL) {
+//        // error handling
+//        let thisfunction = "\(String(describing: self)).\(#function))"
+//        do {
+//            let data: Data = try emojiArt.json()
+//            print("\(thisfunction) json = \(String(data: data, encoding: .utf8))")
+//            try data.write(to: url)
+//            print("\(thisfunction) success!")
+//        } catch let encodingError where encodingError is EncodingError {
+//            print("\(thisfunction) couldn't encode EmojiArt as JSON because \(encodingError.localizedDescription)")
+//        } catch {
+//            print("\(thisfunction) error = \(error)")
+//        }
+//    }
     
     init() {
-        if let url = Autosave.url,
-           let autosavedEmojiArt = try? EmojiArtModel(url: url) {
-            // loading from the local storage
-            emojiArt = autosavedEmojiArt
-            
-            // background is from url
-            fetchBackgroundImageDataIfNeccesary()
-        } else {
-            emojiArt = EmojiArtModel()
-        }
+        emojiArt = EmojiArtModel()
+//        if let url = Autosave.url,
+//           let autosavedEmojiArt = try? EmojiArtModel(url: url) {
+//            // loading from the local storage
+//            emojiArt = autosavedEmojiArt
+//            
+//            // background is from url
+//            fetchBackgroundImageDataIfNeccesary()
+//        } else {
+//            emojiArt = EmojiArtModel()
+//        }
     }
     
     // convience functions
