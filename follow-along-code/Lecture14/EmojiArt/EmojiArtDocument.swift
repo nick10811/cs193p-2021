@@ -7,10 +7,40 @@
 
 import SwiftUI
 import Combine
+import UniformTypeIdentifiers
+
+extension UTType {
+    static let emojiart = UTType(exportedAs: "com.nick10811.cs193p.emojiart")
+}
 
 // ViewModel -> always class
-class EmojiArtDocument: ObservableObject
+class EmojiArtDocument: ReferenceFileDocument
+//class EmojiArtDocument: ObservableObject
 {
+    // MARK: - ReferenceFileDocument
+    
+    static var readableContentTypes = [UTType.emojiart]
+    static var writableContentTypes = [UTType.emojiart]
+    
+    required init(configuration: ReadConfiguration) throws {
+        if let data = configuration.file.regularFileContents {
+            emojiArt = try EmojiArtModel(json: data)
+            fetchBackgroundImageDataIfNeccesary()
+        } else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+    }
+    
+    func snapshot(contentType: UTType) throws -> Data {
+        try emojiArt.json()
+    }
+    
+    func fileWrapper(snapshot: Data, configuration: WriteConfiguration) throws -> FileWrapper {
+        FileWrapper(regularFileWithContents: snapshot)
+    }
+    
+//    typealias Snapshot = Data
+    
     @Published private(set) var emojiArt: EmojiArtModel {
         didSet {
 //            scheduleAutosave()
@@ -73,7 +103,7 @@ class EmojiArtDocument: ObservableObject
 //           let autosavedEmojiArt = try? EmojiArtModel(url: url) {
 //            // loading from the local storage
 //            emojiArt = autosavedEmojiArt
-//            
+//
 //            // background is from url
 //            fetchBackgroundImageDataIfNeccesary()
 //        } else {
