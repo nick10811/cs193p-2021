@@ -35,17 +35,19 @@ struct PaletteManager: View {
             }
             .navigationTitle("Manage Palettes")
             .navigationBarTitleDisplayMode(.inline)
+            // reuse dismiassable()
+            .dismissable { presntationMode.wrappedValue.dismiss() }
             .toolbar {
                 ToolbarItem{ EditButton() }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    if presntationMode.wrappedValue.isPresented,
-                       UIDevice.current.userInterfaceIdiom != .pad {
-                        // ipad can click outside of the sheet
-                        Button("Close") {
-                            presntationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    if presntationMode.wrappedValue.isPresented,
+//                       UIDevice.current.userInterfaceIdiom != .pad {
+//                        // ipad can click outside of the sheet
+//                        Button("Close") {
+//                            presntationMode.wrappedValue.dismiss()
+//                        }
+//                    }
+//                }
             }
             .environment(\.editMode, $editMode) // set to environment
         }
