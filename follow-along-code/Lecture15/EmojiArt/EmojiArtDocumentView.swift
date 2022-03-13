@@ -69,6 +69,9 @@ struct EmojiArtDocumentView: View {
                 AnimatedActionButton(title: "Paste Background", systemImage: "doc.on.clipboard") {
                     pasteBackground()
                 }
+                AnimatedActionButton(title: "Camera", systemImage: "camera") {
+                    backgroundPicker = .camera
+                }
                 if let undoManager = undoManager {
                     if undoManager.canUndo {
                         AnimatedActionButton(title: undoManager.undoActionName, systemImage: "arrow.uturn.backward") {
@@ -80,6 +83,12 @@ struct EmojiArtDocumentView: View {
                             undoManager.redo()
                         }
                     }
+                }
+            }
+            .sheet(item: $backgroundPicker) { pickerType in
+                switch pickerType {
+                case .camera: Camera(handlePickedImage: { image in handlePickedBackgroundImage(image) })
+                case .library: EmptyView()
                 }
             }
 //            .toolbar {
@@ -113,7 +122,24 @@ struct EmojiArtDocumentView: View {
         }
     }
     
+    private func handlePickedBackgroundImage(_ image: UIImage?) {
+        autozoom = true
+        if let imageData = image?.jpegData(compressionQuality: 1.0) {
+            document.setBackground(.imageData(imageData), undoManager: undoManager)
+        }
+        backgroundPicker = nil
+    }
+    
+    @State private var backgroundPicker: BackgroundPickerType?
+    
+    enum BackgroundPickerType: String, Identifiable {
+        case camera
+        case library
+        var id: String { rawValue }
+    }
+    
     private func pasteBackground() {
+        autozoom = true
         if let imageData = UIPasteboard.general.image?.jpegData(compressionQuality: 1.0) {
             document.setBackground(.imageData(imageData), undoManager: undoManager)
         } else if let url = UIPasteboard.general.url?.imageURL {
