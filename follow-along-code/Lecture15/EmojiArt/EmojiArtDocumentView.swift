@@ -71,8 +71,14 @@ struct EmojiArtDocumentView: View {
                 }
                 if Camera.isAvailable {
                     // the camera only can be run on the physical
-                    AnimatedActionButton(title: "Camera", systemImage: "camera") {
+                    AnimatedActionButton(title: "Take photo", systemImage: "camera") {
                         backgroundPicker = .camera
+                    }
+                }
+                if PhotoLibrary.isAvailable {
+                    // the camera only can be run on the physical
+                    AnimatedActionButton(title: "Search Photo", systemImage: "photo") {
+                        backgroundPicker = .library
                     }
                 }
                 if let undoManager = undoManager {
@@ -91,7 +97,8 @@ struct EmojiArtDocumentView: View {
             .sheet(item: $backgroundPicker) { pickerType in
                 switch pickerType {
                 case .camera: Camera(handlePickedImage: { image in handlePickedBackgroundImage(image) })
-                case .library: EmptyView()
+//                case .library: EmptyView()
+                case .library: PhotoLibrary(handlePickedImage: { image in handlePickedBackgroundImage(image) })
                 }
             }
 //            .toolbar {
