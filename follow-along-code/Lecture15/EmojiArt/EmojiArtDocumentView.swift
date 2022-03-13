@@ -69,8 +69,11 @@ struct EmojiArtDocumentView: View {
                 AnimatedActionButton(title: "Paste Background", systemImage: "doc.on.clipboard") {
                     pasteBackground()
                 }
-                AnimatedActionButton(title: "Camera", systemImage: "camera") {
-                    backgroundPicker = .camera
+                if Camera.isAvailable {
+                    // the camera only can be run on the physical
+                    AnimatedActionButton(title: "Camera", systemImage: "camera") {
+                        backgroundPicker = .camera
+                    }
                 }
                 if let undoManager = undoManager {
                     if undoManager.canUndo {
