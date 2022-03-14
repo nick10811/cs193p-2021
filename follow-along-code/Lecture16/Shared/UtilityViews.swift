@@ -99,6 +99,7 @@ extension View {
 // L15 or just returns the content unchanged (if horizontally regular)
 struct CompactableIntoContextMenu: ViewModifier {
     // L16 there's no size class on Mac, everything is not compact
+//    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     var compact: Bool { horizontalSizeClass == .compact }

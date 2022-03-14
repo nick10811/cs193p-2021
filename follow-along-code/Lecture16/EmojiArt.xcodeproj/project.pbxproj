@@ -16,7 +16,6 @@
 		94E70CBB27DF805A00192E03 /* EmojiArtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB027DF805900192E03 /* EmojiArtModel.swift */; };
 		94E70CBC27DF805A00192E03 /* EmojiArtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB027DF805900192E03 /* EmojiArtModel.swift */; };
 		94E70CBD27DF805A00192E03 /* PaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB127DF805900192E03 /* PaletteManager.swift */; };
-		94E70CBE27DF805A00192E03 /* PaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB127DF805900192E03 /* PaletteManager.swift */; };
 		94E70CBF27DF805A00192E03 /* PaletteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB227DF805A00192E03 /* PaletteStore.swift */; };
 		94E70CC027DF805A00192E03 /* PaletteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB227DF805A00192E03 /* PaletteStore.swift */; };
 		94E70CC127DF805A00192E03 /* EmojiArtDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB327DF805A00192E03 /* EmojiArtDocumentView.swift */; };
@@ -97,7 +96,6 @@
 				94E70CB027DF805900192E03 /* EmojiArtModel.swift */,
 				94E70CB527DF805A00192E03 /* PaletteChooser.swift */,
 				94E70CB627DF805A00192E03 /* PaletteEditor.swift */,
-				94E70CB127DF805900192E03 /* PaletteManager.swift */,
 				94E70CB227DF805A00192E03 /* PaletteStore.swift */,
 				94E70CB827DF805A00192E03 /* UtilityExtensions.swift */,
 				94E70CBA27DF805A00192E03 /* UtilityViews.swift */,
@@ -120,6 +118,7 @@
 			children = (
 				94E70CB927DF805A00192E03 /* Camera.swift */,
 				94E70CB727DF805A00192E03 /* PhotoLibrary.swift */,
+				94E70CB127DF805900192E03 /* PaletteManager.swift */,
 				94E70C9727DF7DF900192E03 /* Info.plist */,
 			);
 			path = iOS;
@@ -258,7 +257,6 @@
 				94E70CC027DF805A00192E03 /* PaletteStore.swift in Sources */,
 				94E70CD027DF805A00192E03 /* UtilityViews.swift in Sources */,
 				94E70CC227DF805A00192E03 /* EmojiArtDocumentView.swift in Sources */,
-				94E70CBE27DF805A00192E03 /* PaletteManager.swift in Sources */,
 				94E70CC427DF805A00192E03 /* EmojiArtModel.Background.swift in Sources */,
 				94E70CCC27DF805A00192E03 /* UtilityExtensions.swift in Sources */,
 				94E70CD327DF848000192E03 /* macOS.swift in Sources */,
