@@ -14,3 +14,10 @@ typealias UIImage = NSImage
 
 // make compile succeed
 typealias PaletteManager = EmptyView
+
+// on macOS, there is no init(uiImage:) instead, it is init(nsImage:)
+extension Image {
+    init(uiImage: UIImage) {
+        self.init(nsImage: uiImage)
+    }
+}
