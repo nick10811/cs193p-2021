@@ -29,3 +29,20 @@ extension View {
         self
     }
 }
+
+// Camera and PhotoLibrary don't exist on Mac
+// so create a "do nothing" View
+// so that the code can reference them with #if os(iOS) everywhere
+// (doable in this case because of isAvailable returning false)
+struct CantDoItPhotoPicker: View {
+    var handlePickedImage: (UIImage?) -> Void
+    
+    static let isAvailable = false
+    
+    var body: some View {
+        EmptyView()
+    }
+}
+
+typealias Camera = CantDoItPhotoPicker
+typealias PhotoLibrary = CantDoItPhotoPicker
