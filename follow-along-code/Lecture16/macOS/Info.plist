@@ -9,6 +9,8 @@
 			<string>EmojiArt</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.nick10811.cs193p.emojiart</string>
