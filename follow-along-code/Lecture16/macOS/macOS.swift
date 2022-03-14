@@ -11,3 +11,6 @@ import SwiftUI
 
 // typealias UIImage to NSImage on macOS only
 typealias UIImage = NSImage
+
+// make compile succeed
+typealias PaletteManager = EmptyView
