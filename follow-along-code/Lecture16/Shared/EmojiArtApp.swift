@@ -8,10 +8,16 @@
 import SwiftUI
 
 @main
+// App protocol
 struct EmojiArtApp: App {
+    @StateObject var document = EmojiArtDocument()
+    @StateObject var paletteStore = PaletteStore(named: "Default")
+    
+    // Scene: contains the top-level View of application
     var body: some Scene {
-        DocumentGroup(newDocument: EmojiArtDocument()) { file in
-            ContentView(document: file.$document)
+        DocumentGroup(newDocument: { EmojiArtDocument() }) { config in
+            EmojiArtDocumentView(document: config.document)
+                .environmentObject(paletteStore)
         }
     }
 }
