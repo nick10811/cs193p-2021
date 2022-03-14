@@ -33,6 +33,7 @@
 		94E70CD327DF848000192E03 /* macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CD127DF848000192E03 /* macOS.swift */; };
 		94E70CD427DF85E600192E03 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB727DF805A00192E03 /* PhotoLibrary.swift */; };
 		94E70CD527DF85E600192E03 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CB927DF805A00192E03 /* Camera.swift */; };
+		94E70CD727DF8A5F00192E03 /* iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E70CD627DF8A5F00192E03 /* iOS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		94E70CB927DF805A00192E03 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		94E70CBA27DF805A00192E03 /* UtilityViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
 		94E70CD127DF848000192E03 /* macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOS.swift; sourceTree = "<group>"; };
+		94E70CD627DF8A5F00192E03 /* iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				94E70CB927DF805A00192E03 /* Camera.swift */,
 				94E70CB727DF805A00192E03 /* PhotoLibrary.swift */,
 				94E70CB127DF805900192E03 /* PaletteManager.swift */,
+				94E70CD627DF8A5F00192E03 /* iOS.swift */,
 				94E70C9727DF7DF900192E03 /* Info.plist */,
 			);
 			path = iOS;
@@ -239,6 +242,7 @@
 				94E70CD427DF85E600192E03 /* PhotoLibrary.swift in Sources */,
 				94E70CC127DF805A00192E03 /* EmojiArtDocumentView.swift in Sources */,
 				94E70CBD27DF805A00192E03 /* PaletteManager.swift in Sources */,
+				94E70CD727DF8A5F00192E03 /* iOS.swift in Sources */,
 				94E70CC327DF805A00192E03 /* EmojiArtModel.Background.swift in Sources */,
 				94E70CCB27DF805A00192E03 /* UtilityExtensions.swift in Sources */,
 				94E70CA227DF7DF900192E03 /* EmojiArtDocument.swift in Sources */,

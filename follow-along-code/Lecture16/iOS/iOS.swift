@@ -1,0 +1,39 @@
+//
+//  iOS.swift
+//  EmojiArt (iOS)
+//
+//  Created by Nick Yang on 2022/3/14.
+//
+
+import SwiftUI
+
+// platform-specific code
+
+extension View {
+    @ViewBuilder
+    func wrappedInNavigationViewToMakeDismissable(_ dismiss: (() -> Void)?) -> some View {
+        if UIDevice.current.userInterfaceIdiom != .pad, let dismiss = dismiss {
+            NavigationView {
+                self
+                    .navigationBarTitleDisplayMode(.inline)
+                    .dismissable(dismiss)
+            }
+        } else {
+            self
+        }
+    }
+    
+    @ViewBuilder
+    func dismissable(_ dismiss: (() -> Void)?) -> some View {
+        if UIDevice.current.userInterfaceIdiom != .pad, let dismiss = dismiss {
+            self.toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") { dismiss() }
+                }
+            }
+        } else {
+            self
+        }
+    }
+    
+}

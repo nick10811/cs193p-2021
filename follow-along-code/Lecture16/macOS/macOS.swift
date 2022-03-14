@@ -21,3 +21,11 @@ extension Image {
         self.init(nsImage: uiImage)
     }
 }
+
+extension View {
+    // no need to make a macOS sheet/popover dismissable
+    // because you can just tap elsewhere to dismiss
+    func wrappedInNavigationViewToMakeDismissable(_ dismiss: (() -> Void)?) -> some View {
+        self
+    }
+}
