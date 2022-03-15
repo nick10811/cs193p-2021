@@ -51,3 +51,14 @@ typealias PhotoLibrary = CantDoItPhotoPicker
 extension UIImage {
     var imageData: Data? { tiffRepresentation }
 }
+
+// a struct which contains statics to access the Pasteboard
+struct Pasteboard {
+    static var imageData: Data? {
+        NSPasteboard.general.data(forType: .tiff) ?? NSPasteboard.general.data(forType: .png)
+    }
+    
+    static var imageURL: URL? {
+        ((NSURL (from: NSPasteboard.general)) as URL?)?.imageURL
+    }
+}

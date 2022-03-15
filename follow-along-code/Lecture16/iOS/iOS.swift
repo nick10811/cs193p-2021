@@ -42,3 +42,14 @@ extension View {
 extension UIImage {
     var imageData: Data? { jpegData(compressionQuality: 1.0) }
 }
+
+// a struct which contains statics to access the Pasteboard
+struct Pasteboard {
+    static var imageData: Data? {
+        UIPasteboard.general.image?.imageData
+    }
+    
+    static var imageURL: URL? {
+        UIPasteboard.general.url?.imageURL
+    }
+}
