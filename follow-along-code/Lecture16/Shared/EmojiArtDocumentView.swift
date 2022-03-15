@@ -154,6 +154,8 @@ struct EmojiArtDocumentView: View {
             autozoom = true
             document.setBackground(.url(url.imageURL), undoManager: undoManager)
         }
+        // NSImage does not have an NSItemProvider
+        #if os(iOS)
         if !found {
             found = providers.loadObjects(ofType: UIImage.self) { image in
                 if let data = image.jpegData(compressionQuality: 1.0) {
@@ -162,6 +164,7 @@ struct EmojiArtDocumentView: View {
                 }
             }
         }
+        #endif
         if !found {
             found = providers.loadObjects(ofType: String.self) { string in
                 if let emoji = string.first, emoji.isEmoji {
