@@ -28,6 +28,10 @@ extension View {
     func wrappedInNavigationViewToMakeDismissable(_ dismiss: (() -> Void)?) -> some View {
         self
     }
+    
+    func plainButtonOnMacOnly() -> some View {
+        self.buttonStyle(PlainButtonStyle()).foregroundColor(.accentColor)
+    }
 }
 
 // Camera and PhotoLibrary don't exist on Mac

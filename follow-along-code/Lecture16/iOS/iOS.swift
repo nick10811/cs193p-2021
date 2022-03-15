@@ -36,6 +36,10 @@ extension View {
         }
     }
     
+    func plainButtonOnMacOnly() -> some View {
+        self
+    }
+    
 }
 
 // create an abstraction both in iOS & macOS
