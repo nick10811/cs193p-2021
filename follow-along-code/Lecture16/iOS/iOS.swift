@@ -39,6 +39,9 @@ extension View {
     func plainButtonOnMacOnly() -> some View {
         self
     }
+    func paletteButtonStyle() -> some View {
+        self
+    }
     
 }
 

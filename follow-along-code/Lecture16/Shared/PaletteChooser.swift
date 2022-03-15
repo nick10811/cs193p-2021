@@ -34,7 +34,8 @@ struct PaletteChooser: View {
             Image(systemName: "paintpalette")
         }
         .font(emojiFont)
-        .plainButtonOnMacOnly()
+//        .plainButtonOnMacOnly()
+        .paletteButtonStyle()
         .contextMenu{ contextMenu }
     }
     

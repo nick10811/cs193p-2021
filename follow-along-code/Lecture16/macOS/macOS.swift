@@ -32,6 +32,10 @@ extension View {
     func plainButtonOnMacOnly() -> some View {
         self.buttonStyle(PlainButtonStyle()).foregroundColor(.accentColor)
     }
+    
+    func paletteButtonStyle() -> some View {
+        self.buttonStyle(PlainButtonStyle()).foregroundColor(.accentColor).padding()
+    }
 }
 
 // Camera and PhotoLibrary don't exist on Mac
