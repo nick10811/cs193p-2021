@@ -42,6 +42,9 @@ extension View {
     func paletteButtonStyle() -> some View {
         self
     }
+    func popoverPadding() -> some View {
+        self
+    }
     
 }
 

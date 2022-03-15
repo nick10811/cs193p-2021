@@ -83,6 +83,7 @@ struct PaletteChooser: View {
         .transition(rollTransition)
         .popover(item: $paletteToEdit) { palette in
             PaletteEditor(palette: $store.palettes[palette])
+                .popoverPadding()
                 // long naming here to make it readable
                 .wrappedInNavigationViewToMakeDismissable { paletteToEdit = nil }
         }

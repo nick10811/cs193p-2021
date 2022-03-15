@@ -36,6 +36,10 @@ extension View {
     func paletteButtonStyle() -> some View {
         self.buttonStyle(PlainButtonStyle()).foregroundColor(.accentColor).padding()
     }
+    
+    func popoverPadding() -> some View {
+        self.padding(.horizontal)
+    }
 }
 
 // Camera and PhotoLibrary don't exist on Mac
