@@ -46,3 +46,8 @@ struct CantDoItPhotoPicker: View {
 
 typealias Camera = CantDoItPhotoPicker
 typealias PhotoLibrary = CantDoItPhotoPicker
+
+// create an abstraction both in iOS & macOS
+extension UIImage {
+    var imageData: Data? { tiffRepresentation }
+}

@@ -37,3 +37,8 @@ extension View {
     }
     
 }
+
+// create an abstraction both in iOS & macOS
+extension UIImage {
+    var imageData: Data? { jpegData(compressionQuality: 1.0) }
+}

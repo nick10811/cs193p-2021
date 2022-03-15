@@ -105,7 +105,8 @@ struct EmojiArtDocumentView: View {
     
     private func handlePickedBackgroundImage(_ image: UIImage?) {
         autozoom = true
-        if let imageData = image?.jpegData(compressionQuality: 1.0) {
+        if let imageData = image?.imageData {
+//        if let imageData = image?.jpegData(compressionQuality: 1.0) {
             document.setBackground(.imageData(imageData), undoManager: undoManager)
         }
         backgroundPicker = nil
